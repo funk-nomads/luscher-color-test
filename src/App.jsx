@@ -5,7 +5,7 @@ import exampleVideo from './assets/example.mp4?url';
 import instructionIcon from './assets/instruction.svg?url';
 import againIcon from './assets/again.svg?url';
 import warningIcon from './assets/warning.svg?url';
-
+import caretIcon from './assets/caret.svg?url';
 
 const API_KEY = 'API_KEY';
 
@@ -251,7 +251,7 @@ export default function App() {
                         </div>
                         <div className="luscher-btn-row">
                             <button onClick={startTest} className="luscher-btn-primary">
-                                Розпочати тест &gt;
+                                Розпочати тест <img src={caretIcon} className="luscher-icon-sm" alt="" />
                             </button>
                         </div>
                     </div>
@@ -314,7 +314,7 @@ export default function App() {
                                 Спочатку
                             </button>
                             <button onClick={startSecondRound} className="luscher-btn-primary">
-                                Продовжити тест &gt;
+                                Продовжити тест <img src={caretIcon} className="luscher-icon-sm" alt="" />
                             </button>
                         </div>
                     </div>

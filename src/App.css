@@ -8,14 +8,14 @@
 /* ---- HOST / RESET ---- */
 :host {
     --luscher-font: Tektur, sans-serif;
-    --luscher-accent: #346C4F;
-    --luscher-btn-dark: #2d2d2d;
-    --luscher-btn-dark-hover: #111111;
+    --luscher-accent: #53887F;
+    --luscher-btn-dark: #27272A;
+    --luscher-btn-dark-hover: #000000;
     --luscher-btn-gray: #A1A1AA;
-    --luscher-btn-gray-hover: #d0d0d0;
+    --luscher-btn-gray-hover: #bcbcc1;
     --luscher-btn-green: #346C4F;
     --luscher-btn-green-hover: #2a5a3f;
-    --luscher-border: 1px dashed #cccccc;
+    --luscher-border: 1px dashed #71717A;
     --luscher-radius: 24px;
 
     display: block;
@@ -61,8 +61,8 @@
 /* ---- PROGRESS BAR ---- */
 .luscher-progress-track {
     width: calc(100% - 48px);
-    height: 4px;
-    background: #e5e5e5;
+    height: 8px;
+    background: #E4E4E7;
     margin: 0 auto;
 }
 
