@@ -1,0 +1,5 @@
+/* Global styles intentionally minimal — app runs inside Shadow DOM */
+body {
+    margin: 0;
+    padding: 0;
+}
