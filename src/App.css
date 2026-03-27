@@ -60,7 +60,7 @@
 
 /* ---- PROGRESS BAR ---- */
 .luscher-progress-track {
-    width: calc(100% - 48px);
+    width: 100%;
     height: 8px;
     background: #E4E4E7;
     margin: 0 auto;
@@ -75,7 +75,7 @@
 /* ---- MAIN CONTENT ---- */
 .luscher-main {
     margin: 0 auto;
-    padding: 40px 24px 0;
+    padding: 40px 0 0;
 }
 
 /* ---- STAGE ---- */
@@ -281,6 +281,10 @@
     cursor: pointer;
 }
 
+.luscher-btn-primary--again {
+    margin-top: 36px;
+}
+
 /* ---- INSTRUCTIONS LIST ---- */
 .luscher-instructions-list {
     list-style: disc;
@@ -439,6 +443,6 @@
     }
 
     .luscher-main {
-        padding: 24px 16px 48px;
+        padding: 24px 0 48px;
     }
 }

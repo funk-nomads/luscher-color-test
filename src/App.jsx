@@ -427,7 +427,7 @@ export default function App() {
                             </div>
 
                             <div className="luscher-btn-row">
-                                <button onClick={resetTest} className="luscher-btn-primary">
+                                <button onClick={resetTest} className="luscher-btn-primary luscher-btn-primary--again">
                                     <img src={againIcon} className="luscher-icon-sm" alt="" />
                                     Пройти тест ще раз
                                 </button>
