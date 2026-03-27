@@ -232,7 +232,7 @@ export default function App() {
                         <div className="luscher-card">
                             <div className="luscher-card__label">
                                 <img src={instructionIcon} className="luscher-icon-sm" alt="" />
-                                <strong>Інструкція:</strong>
+                                <span>Інструкція:</span>
                             </div>
                             <p className="luscher-card__text">
                                 На наступному екрані обирайте той колір, який вам зараз здається найбільш приємним. Не асоціюйте кольори з одягом чи інтер'єром — обирайте інтуїтивно.
@@ -263,15 +263,15 @@ export default function App() {
                     <div className="luscher-stage">
                         <div className="luscher-card">
                             <p className="luscher-card__round-label">
-                                <strong>Спроба {round}:</strong>
+                                <span>Спроба {round}:</span>
                             </p>
                             <p className="luscher-card__text">Оберіть найприємніший колір</p>
                         </div>
                         <p className="luscher-count-text">
                             {availableCount === 0 ?
-                                <strong>Чудово!</strong>
+                                <span>Чудово!</span>
                                 :
-                                <strong>Залишилось обрати: {availableCount}</strong>
+                                <span>Залишилось обрати: {availableCount}</span>
                             }
                         </p>
                         <div className="luscher-color-grid">
@@ -304,7 +304,7 @@ export default function App() {
                             <div className="luscher-card">
                                 <div className="luscher-card__label">
                                     <img src={pauseIcon} className="luscher-icon-sm" alt="" />
-                                    <strong>Невелика перерва</strong>
+                                    <span>Невелика перерва</span>
                                 </div>
 
                                 <p className="luscher-card__text">Методика тестування передбачає два підходи з невеликим інтервалом між ними.</p>
@@ -336,7 +336,7 @@ export default function App() {
                             <div className="luscher-card luscher-results-header">
                                 <div className="luscher-card__label">
                                     <img src={resultIcon} className="luscher-icon-sm" alt="" />
-                                    <strong>Результати діагностики</strong>
+                                    <span>Результати діагностики</span>
                                 </div>
                                 <p className="luscher-card__text">На основі вашого вибору (2-й прохід)</p>
                             </div>
@@ -371,7 +371,7 @@ export default function App() {
                                 <>
                                     <div className="luscher-card__label">
                                         <Sparkles className="luscher-icon-sm" />
-                                        <strong>Глибокий AI-аналіз</strong>
+                                        <span>Глибокий AI-аналіз</span>
                                     </div>
                                     <p className="luscher-card__text" style={{ fontStyle: 'italic' }}>
                                         Отримайте персоналізований синтез результатів та конкретні поради
@@ -405,7 +405,7 @@ export default function App() {
                                 <>
                                     <div className="luscher-card__label">
                                         <Sparkles className="luscher-icon-sm" />
-                                        <strong>Персональний AI-звіт</strong>
+                                        <span>Персональний AI-звіт</span>
                                     </div>
                                     <div className="luscher-prose">
                                         <ReactMarkdown>{aiAnalysis}</ReactMarkdown>
@@ -418,7 +418,7 @@ export default function App() {
                             <div className="luscher-card">
                                 <div className="luscher-card__label">
                                     <img src={warningIcon} className="luscher-icon-sm" alt="" />
-                                    <strong>Важливе зауваження:</strong>
+                                    <span>Важливе зауваження:</span>
                                 </div>
                                 <p className="luscher-card__text">
                                     Цей тест є інструментом для самопізнання "тут і зараз". Результати залежать від моменту тестування.
