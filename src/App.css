@@ -10,11 +10,11 @@
     --luscher-font: Tektur, sans-serif;
     --luscher-accent: #53887F;
     --luscher-btn-dark: #27272A;
-    --luscher-btn-dark-hover: #000000;
+    --luscher-btn-dark-hover: #53887f;
     --luscher-btn-gray: #A1A1AA;
-    --luscher-btn-gray-hover: #bcbcc1;
-    --luscher-btn-green: #346C4F;
-    --luscher-btn-green-hover: #2a5a3f;
+    --luscher-btn-gray-hover: #53887f;
+    --luscher-btn-green: #53887f;
+    --luscher-btn-green-hover: #53887f;
     --luscher-border: 1px dashed #71717A;
     --luscher-radius: 24px;
 
@@ -171,12 +171,11 @@
 .luscher-color-grid {
     display: flex;
     justify-content: center;
-    gap: 6px;
 }
 
 .luscher-color-card {
-    width: calc(100% / 8);
-    max-width: calc(100% / 8);
+    flex: 0 0 calc((100% - 8 * 6px) / 8);
+    margin-right: 6px;
     aspect-ratio: 1 / 1;
     border: none;
     border-radius: 0;
@@ -185,14 +184,25 @@
     display: block;
     padding: 0;
     overflow: hidden;
-    transition: transform 0.22s ease, opacity 0.22s ease, max-width 0.26s ease 0.15s;
+    transition: transform 0.15s ease, opacity 0.22s ease, flex-basis 0.3s ease, margin-right 0.3s ease;
+}
+
+.luscher-color-card:hover {
+    transform: scale(0.95);
+}
+
+.luscher-color-card:active {
+    transform: scale(0.82);
+    transition-duration: 0.08s, 0.22s, 0.3s, 0.3s;
 }
 
 .luscher-color-card.is-exiting {
     transform: scale(0);
     opacity: 0;
-    max-width: 0;
+    flex-basis: 0 !important;
+    margin-right: 0 !important;
     pointer-events: none;
+    transition: transform 0.22s ease, opacity 0.22s ease, flex-basis 0.3s ease, margin-right 0.3s ease;
 }
 
 /* ---- BUTTONS ---- */
@@ -416,8 +426,7 @@
     }
 
     .luscher-color-card {
-        width: calc(100% / 4);
-        max-width: calc(100% / 4);
+        flex: 0 0 calc((100% - 4 * 6px) / 4);
     }
 
     .luscher-main {

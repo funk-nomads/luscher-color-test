@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { RefreshCw, Sparkles, Loader2, Clock, CheckCircle, FileText } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import exampleVideo from './assets/example.mp4?url';
 import instructionIcon from './assets/instruction.svg?url';
 import againIcon from './assets/again.svg?url';
 import warningIcon from './assets/warning.svg?url';
 import caretIcon from './assets/caret.svg?url';
+import pauseIcon from './assets/pause.svg?url';
+import resultIcon from './assets/result.svg?url';
 
 const API_KEY = 'API_KEY';
 
@@ -118,7 +119,7 @@ export default function App() {
         setRoundColors(shuffle());
         setRound(2);
         setSelectedColors([]);
-        setStage('test');
+        setStage('test'), 1000;
     };
 
     const handleColorSelect = (color) => {
@@ -132,9 +133,9 @@ export default function App() {
 
             if (newSelected.length === 8) {
                 if (round === 1) {
-                    setTimeout(() => setStage('intermission'), 400);
+                    setTimeout(() => setStage('intermission'), 1400);
                 } else {
-                    setTimeout(() => setStage('results'), 400);
+                    setTimeout(() => setStage('results'), 1400);
                 }
             }
         }, 380);
@@ -267,7 +268,11 @@ export default function App() {
                             <p className="luscher-card__text">Оберіть найприємніший колір</p>
                         </div>
                         <p className="luscher-count-text">
-                            <strong>Залишилось обрати: {availableCount}</strong>
+                            {availableCount === 0 ?
+                                <strong>Чудово!</strong>
+                                :
+                                <strong>Залишилось обрати: {availableCount}</strong>
+                            }
                         </p>
                         <div className="luscher-color-grid">
                             {roundColors
@@ -289,75 +294,79 @@ export default function App() {
                             </button>
                         </div>
                     </div>
-                )}
+                )
+                }
 
                 {/* STAGE 3: INTERMISSION */}
-                {stage === 'intermission' && (
-                    <div className="luscher-stage">
-                        <div className="luscher-card">
-                            <div className="luscher-card__label">
-                                <Clock className="luscher-icon-sm" />
-                                <strong>Невелика перерва</strong>
-                            </div>
+                {
+                    stage === 'intermission' && (
+                        <div className="luscher-stage">
+                            <div className="luscher-card">
+                                <div className="luscher-card__label">
+                                    <img src={pauseIcon} className="luscher-icon-sm" alt="" />
+                                    <strong>Невелика перерва</strong>
+                                </div>
 
-                            <p className="luscher-card__text">Методика тестування передбачає два підходи з невеликим інтервалом між ними.</p>
-                            <p className="luscher-card__text">Будь ласка, зачекайте хвилинку та розслабтеся.</p>
-                            <ul className="luscher-instructions-list">
-                                <li>Не намагайтеся згадати той порядок, у якому обирали кольори першого разу.</li>
-                                <li>Але й не намагайтеся спеціально розкласти їх по-іншому.</li>
-                                <li>Просто обирайте кольори, які вам подобаються, так, ніби бачите їх вперше.</li>
-                            </ul>
+                                <p className="luscher-card__text">Методика тестування передбачає два підходи з невеликим інтервалом між ними.</p>
+                                <p className="luscher-card__text">Будь ласка, зачекайте хвилинку та розслабтеся.</p>
+                                <ul className="luscher-instructions-list">
+                                    <li>Не намагайтеся згадати той порядок, у якому обирали кольори першого разу.</li>
+                                    <li>Але й не намагайтеся спеціально розкласти їх по-іншому.</li>
+                                    <li>Просто обирайте кольори, які вам подобаються, так, ніби бачите їх вперше.</li>
+                                </ul>
+                            </div>
+                            <div className="luscher-btn-row luscher-btn-row--gap">
+                                <button onClick={resetTest} className="luscher-btn-secondary">
+                                    <img src={againIcon} className="luscher-icon-sm" alt="" />
+                                    Спочатку
+                                </button>
+                                <button onClick={startSecondRound} className="luscher-btn-primary">
+                                    Продовжити тест <img src={caretIcon} className="luscher-icon-sm" alt="" />
+                                </button>
+                            </div>
                         </div>
-                        <div className="luscher-btn-row luscher-btn-row--gap">
-                            <button onClick={resetTest} className="luscher-btn-secondary">
-                                <img src={againIcon} className="luscher-icon-sm" alt="" />
-                                Спочатку
-                            </button>
-                            <button onClick={startSecondRound} className="luscher-btn-primary">
-                                Продовжити тест <img src={caretIcon} className="luscher-icon-sm" alt="" />
-                            </button>
-                        </div>
-                    </div>
-                )}
+                    )
+                }
 
                 {/* STAGE 5: RESULTS */}
-                {stage === 'results' && results && (
-                    <div className="luscher-stage">
+                {
+                    stage === 'results' && results && (
+                        <div className="luscher-stage">
 
-                        <div className="luscher-card luscher-results-header">
-                            <div className="luscher-card__label">
-                                <CheckCircle className="luscher-icon-sm" />
-                                <strong>Результати діагностики</strong>
+                            <div className="luscher-card luscher-results-header">
+                                <div className="luscher-card__label">
+                                    <img src={resultIcon} className="luscher-icon-sm" alt="" />
+                                    <strong>Результати діагностики</strong>
+                                </div>
+                                <p className="luscher-card__text">На основі вашого вибору (2-й прохід)</p>
                             </div>
-                            <p className="luscher-card__text">На основі вашого вибору (2-й прохід)</p>
-                        </div>
 
-                        <div className="luscher-card luscher-card--result">
-                            <p className="luscher-result-title">1. ПРАГНЕННЯ ТА ЦЛІ (БАЖАНЕ)</p>
-                            <p className="luscher-result-label">Позиції 1 та 2 (++)</p>
-                            <p className="luscher-card__text">{results.goals}</p>
-                        </div>
+                            <div className="luscher-card luscher-card--result">
+                                <p className="luscher-result-title">1. ПРАГНЕННЯ ТА ЦЛІ (БАЖАНЕ)</p>
+                                <p className="luscher-result-label">Позиції 1 та 2 (++)</p>
+                                <p className="luscher-card__text">{results.goals}</p>
+                            </div>
 
-                        <div className="luscher-card luscher-card--result">
-                            <p className="luscher-result-title">2. ПОТОЧНИЙ СТАН (РЕАЛЬНЕ)</p>
-                            <p className="luscher-result-label">Позиції 3 та 4 (xx)</p>
-                            <p className="luscher-card__text">{results.actual}</p>
-                        </div>
+                            <div className="luscher-card luscher-card--result">
+                                <p className="luscher-result-title">2. ПОТОЧНИЙ СТАН (РЕАЛЬНЕ)</p>
+                                <p className="luscher-result-label">Позиції 3 та 4 (xx)</p>
+                                <p className="luscher-card__text">{results.actual}</p>
+                            </div>
 
-                        <div className="luscher-card luscher-card--result">
-                            <p className="luscher-result-title">3. СТРИМАНІ ВЛАСТИВОСТІ (БАЙДУЖЕ)</p>
-                            <p className="luscher-result-label">Позиції 5 та 6 (==)</p>
-                            <p className="luscher-card__text">{results.indifferent}</p>
-                        </div>
+                            <div className="luscher-card luscher-card--result">
+                                <p className="luscher-result-title">3. СТРИМАНІ ВЛАСТИВОСТІ (БАЙДУЖЕ)</p>
+                                <p className="luscher-result-label">Позиції 5 та 6 (==)</p>
+                                <p className="luscher-card__text">{results.indifferent}</p>
+                            </div>
 
-                        <div className="luscher-card luscher-card--result">
-                            <p className="luscher-result-title">4. ПРИГНІЧЕНІ ПОТРЕБИ (СТРЕС)</p>
-                            <p className="luscher-result-label">Позиції 7 та 8 (--)</p>
-                            <p className="luscher-card__text">{results.rejected}</p>
-                        </div>
+                            <div className="luscher-card luscher-card--result">
+                                <p className="luscher-result-title">4. ПРИГНІЧЕНІ ПОТРЕБИ (СТРЕС)</p>
+                                <p className="luscher-result-label">Позиції 7 та 8 (--)</p>
+                                <p className="luscher-card__text">{results.rejected}</p>
+                            </div>
 
-                        {/* AI ANALYSIS */}
-                        {/*<div className="luscher-card luscher-card--ai">
+                            {/* AI ANALYSIS */}
+                            {/*<div className="luscher-card luscher-card--ai">
                             {!aiAnalysis && !loadingAi && !aiError && (
                                 <>
                                     <div className="luscher-card__label">
@@ -405,29 +414,30 @@ export default function App() {
                             )}
                         </div>*/}
 
-                        {/* DISCLAIMER */}
-                        <div className="luscher-card">
-                            <div className="luscher-card__label">
-                                <img src={warningIcon} className="luscher-icon-sm" alt="" />
-                                <strong>Важливе зауваження:</strong>
+                            {/* DISCLAIMER */}
+                            <div className="luscher-card">
+                                <div className="luscher-card__label">
+                                    <img src={warningIcon} className="luscher-icon-sm" alt="" />
+                                    <strong>Важливе зауваження:</strong>
+                                </div>
+                                <p className="luscher-card__text">
+                                    Цей тест є інструментом для самопізнання "тут і зараз". Результати залежать від моменту тестування.
+                                    Якщо результати вказують на сильний стрес (особливо в блоці 4), рекомендується відпочити або звернутися до фахівця.
+                                </p>
                             </div>
-                            <p className="luscher-card__text">
-                                Цей тест є інструментом для самопізнання "тут і зараз". Результати залежать від моменту тестування.
-                                Якщо результати вказують на сильний стрес (особливо в блоці 4), рекомендується відпочити або звернутися до фахівця.
-                            </p>
+
+                            <div className="luscher-btn-row">
+                                <button onClick={resetTest} className="luscher-btn-primary">
+                                    <img src={againIcon} className="luscher-icon-sm" alt="" />
+                                    Пройти тест ще раз
+                                </button>
+                            </div>
+
                         </div>
+                    )
+                }
 
-                        <div className="luscher-btn-row">
-                            <button onClick={resetTest} className="luscher-btn-primary">
-                                <img src={againIcon} className="luscher-icon-sm" alt="" />
-                                Пройти тест ще раз
-                            </button>
-                        </div>
-
-                    </div>
-                )}
-
-            </main>
-        </div>
+            </main >
+        </div >
     );
 }
