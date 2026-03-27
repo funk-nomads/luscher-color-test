@@ -7,7 +7,7 @@
 
 /* ---- HOST / RESET ---- */
 :host {
-    --luscher-font: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --luscher-font: Tektur, sans-serif;
     --luscher-accent: #346C4F;
     --luscher-btn-dark: #2d2d2d;
     --luscher-btn-dark-hover: #111111;
@@ -75,7 +75,7 @@
 /* ---- MAIN CONTENT ---- */
 .luscher-main {
     margin: 0 auto;
-    padding: 40px 24px 64px;
+    padding: 40px 24px 0;
 }
 
 /* ---- STAGE ---- */
