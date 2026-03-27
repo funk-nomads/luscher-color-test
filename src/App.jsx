@@ -252,7 +252,7 @@ export default function App() {
                         </div>
                         <div className="luscher-btn-row">
                             <button onClick={startTest} className="luscher-btn-primary">
-                                Розпочати тест <img src={caretIcon} className="luscher-icon-sm" alt="" />
+                                Розпочати тест <img src={caretIcon} className="luscher-icon-sm" alt="" style={{ width: '8px', marginBottom: '-1px' }} />
                             </button>
                         </div>
                     </div>
@@ -288,7 +288,7 @@ export default function App() {
                             }
                         </div>
                         <div className="luscher-btn-row">
-                            <button onClick={resetTest} className="luscher-btn-secondary">
+                            <button onClick={resetTest} className="luscher-btn-secondary" disabled={availableCount === 0}>
                                 <img src={againIcon} className="luscher-icon-sm" alt="" />
                                 Спочатку
                             </button>
@@ -321,7 +321,7 @@ export default function App() {
                                     Спочатку
                                 </button>
                                 <button onClick={startSecondRound} className="luscher-btn-primary">
-                                    Продовжити тест <img src={caretIcon} className="luscher-icon-sm" alt="" />
+                                    Продовжити тест <img src={caretIcon} className="luscher-icon-sm" alt="" style={{ width: '8px', marginBottom: '-1px' }} />
                                 </button>
                             </div>
                         </div>

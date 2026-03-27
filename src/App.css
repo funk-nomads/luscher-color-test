@@ -222,14 +222,16 @@
 .luscher-btn-primary,
 .luscher-btn-secondary,
 .luscher-btn-green {
+    height: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     border: none;
-    padding: 10px 24px;
-    font-size: 15px;
+    padding: 8px 12px;
+    font-size: 14px;
     font-weight: 500;
+    line-height: 85%;
     font-family: var(--luscher-font);
     cursor: pointer;
     transition: background 0.15s;
@@ -251,6 +253,11 @@
 
 .luscher-btn-secondary:hover {
     background: var(--luscher-btn-gray-hover);
+}
+
+.luscher-btn-secondary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
 .luscher-btn-green {
