@@ -116,7 +116,7 @@
     font-size: 14px;
     font-weight: 700;
     line-height: 1.5;
-    color: #000;
+    color: #18181B;
 }
 
 .luscher-card__text {
@@ -129,7 +129,7 @@
     font-size: 14px;
     font-weight: 700;
     line-height: 1.5;
-    color: #000;
+    color: #18181B;
 }
 
 /* ---- EXAMPLE VIDEO BLOCK ---- */
@@ -168,8 +168,8 @@
 .luscher-count-text {
     text-align: center;
     font-size: 12px;
-    font-weight: 700;
-    color: #000;
+    font-weight: 600;
+    color: #18181B;
 }
 
 /* ---- COLOR GRID ---- */
@@ -189,17 +189,26 @@
     font-family: var(--luscher-font);
     display: block;
     padding: 0;
+    position: relative;
     overflow: hidden;
-    transition: transform 0.15s ease, opacity 0.22s ease, flex-basis 0.3s ease, margin-right 0.3s ease;
+    background: #fff;
+    transition: opacity 0.22s ease, flex-basis 0.3s ease, margin-right 0.3s ease;
 }
 
-.luscher-color-card:hover {
-    transform: scale(0.95);
+.luscher-color-card__fill {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.15s ease, filter 0.15s ease;
 }
 
-.luscher-color-card:active {
+.luscher-color-card:hover .luscher-color-card__fill {
+    filter: brightness(0.88);
+}
+
+.luscher-color-card:active .luscher-color-card__fill {
     transform: scale(0.82);
-    transition-duration: 0.08s, 0.22s, 0.3s, 0.3s;
+    filter: brightness(0.82);
+    transition-duration: 0.08s, 0.08s;
 }
 
 .luscher-color-card.is-exiting {
@@ -311,13 +320,13 @@
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #000;
+    color: #18181B;
 }
 
 .luscher-result-label {
     font-size: 14px;
     font-weight: 700;
-    color: #000;
+    color: #18181B;
 }
 
 /* ---- AI SECTION ---- */

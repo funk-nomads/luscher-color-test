@@ -78,9 +78,9 @@ const ColorCard = ({ color, onClick, isExiting }) => (
     <button
         onClick={() => !isExiting && onClick(color)}
         className={`luscher-color-card${isExiting ? ' is-exiting' : ''}`}
-        style={{ backgroundColor: color.hex }}
         aria-label={`Обрати колір ${color.name}`}
     >
+        <span className="luscher-color-card__fill" style={{ backgroundColor: color.hex }} />
         <span className="sr-only">{color.name}</span>
     </button>
 );
@@ -90,7 +90,7 @@ export default function App() {
     const [round, setRound] = useState(1);
     const [roundColors, setRoundColors] = useState([]);
     const [selectedColors, setSelectedColors] = useState([]);
-    const [exitingColorId, setExitingColorId] = useState(null);
+    const [exitingColorIds, setExitingColorIds] = useState(new Set());
 
 
     const [aiAnalysis, setAiAnalysis] = useState(null);
@@ -107,7 +107,7 @@ export default function App() {
         setRoundColors(shuffle());
         setRound(1);
         setSelectedColors([]);
-        setExitingColorId(null);
+        setExitingColorIds(new Set());
         setAiAnalysis(null);
         setAiError(false);
         setStage('intro');
@@ -123,21 +123,26 @@ export default function App() {
     };
 
     const handleColorSelect = (color) => {
-        if (exitingColorId !== null) return;
-        setExitingColorId(color.id);
+        if (exitingColorIds.has(color.id)) return;
+        setExitingColorIds(prev => new Set([...prev, color.id]));
 
         setTimeout(() => {
-            setExitingColorId(null);
-            const newSelected = [...selectedColors, color];
-            setSelectedColors(newSelected);
-
-            if (newSelected.length === 8) {
-                if (round === 1) {
-                    setTimeout(() => setStage('intermission'), 1400);
-                } else {
-                    setTimeout(() => setStage('results'), 1400);
+            setExitingColorIds(prev => {
+                const next = new Set(prev);
+                next.delete(color.id);
+                return next;
+            });
+            setSelectedColors(prev => {
+                const newSelected = [...prev, color];
+                if (newSelected.length === 8) {
+                    if (round === 1) {
+                        setTimeout(() => setStage('intermission'), 1400);
+                    } else {
+                        setTimeout(() => setStage('results'), 1400);
+                    }
                 }
-            }
+                return newSelected;
+            });
         }, 380);
     };
 
@@ -282,7 +287,7 @@ export default function App() {
                                         key={color.id}
                                         color={color}
                                         onClick={handleColorSelect}
-                                        isExiting={exitingColorId === color.id}
+                                        isExiting={exitingColorIds.has(color.id)}
                                     />
                                 ))
                             }
