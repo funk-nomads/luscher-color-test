@@ -220,6 +220,15 @@
     transition: transform 0.22s ease, opacity 0.22s ease, flex-basis 0.3s ease, margin-right 0.3s ease;
 }
 
+.luscher-color-card.is-selected {
+    transform: scale(0);
+    opacity: 0;
+    flex-basis: 0 !important;
+    margin-right: 0 !important;
+    pointer-events: none;
+    transition: flex-basis 0.3s ease, margin-right 0.3s ease;
+}
+
 /* ---- BUTTONS ---- */
 .luscher-btn-row {
     display: flex;
@@ -445,6 +454,18 @@
 }
 
 /* ---- MOBILE ---- */
+@media (max-width: 768px) {
+    .luscher-color-card.is-exiting {
+        flex-basis: calc((100% - 8 * 6px) / 8) !important;
+        margin-right: 6px !important;
+    }
+
+    .luscher-color-card.is-selected {
+        flex-basis: calc((100% - 8 * 6px) / 8) !important;
+        margin-right: 6px !important;
+    }
+}
+
 @media (max-width: 520px) {
     .luscher-color-grid {
         flex-wrap: wrap;
@@ -452,6 +473,16 @@
 
     .luscher-color-card {
         flex: 0 0 calc((100% - 4 * 6px) / 4);
+    }
+
+    .luscher-color-card.is-exiting {
+        flex-basis: calc((100% - 4 * 6px) / 4) !important;
+        margin-right: 6px !important;
+    }
+
+    .luscher-color-card.is-selected {
+        flex-basis: calc((100% - 4 * 6px) / 4) !important;
+        margin-right: 6px !important;
     }
 
     .luscher-main {

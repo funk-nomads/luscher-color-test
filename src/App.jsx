@@ -12,14 +12,14 @@ const API_KEY = 'API_KEY';
 
 // --- DATA ---
 const LUSCHER_COLORS = [
-    { id: 0, name: 'Сірий', hex: '#AEAEAE' },
-    { id: 1, name: 'Синій', hex: '#004F7C' },
-    { id: 2, name: 'Зелений', hex: '#346C4F' },
-    { id: 3, name: 'Червоний', hex: '#D82C20' },
-    { id: 4, name: 'Жовтий', hex: '#EEDC00' },
-    { id: 5, name: 'Фіолетовий', hex: '#7C3473' },
-    { id: 6, name: 'Коричневий', hex: '#6F4229' },
-    { id: 7, name: 'Чорний', hex: '#000000' },
+    { id: 0, name: 'Сірий', hex: 'rgba(174, 174, 174, 1)' },
+    { id: 1, name: 'Синій', hex: 'rgba(0, 93, 147, 1)' },
+    { id: 2, name: 'Зелений', hex: 'rgba(34, 128, 79, 1)' },
+    { id: 3, name: 'Червоний', hex: 'rgba(255, 0, 0, 1)' },
+    { id: 4, name: 'Жовтий', hex: 'rgba(255, 236, 0, 1)' },
+    { id: 5, name: 'Фіолетовий', hex: 'rgba(162, 45, 148, 1)' },
+    { id: 6, name: 'Коричневий', hex: 'rgba(137, 63, 22, 1)' },
+    { id: 7, name: 'Чорний', hex: 'rgba(0, 0, 0, 1)' },
 ];
 
 const INTERPRETATIONS = {
@@ -74,10 +74,10 @@ const INTERPRETATIONS = {
 };
 
 // --- COMPONENTS ---
-const ColorCard = ({ color, onClick, isExiting }) => (
+const ColorCard = ({ color, onClick, isExiting, isSelected }) => (
     <button
-        onClick={() => !isExiting && onClick(color)}
-        className={`luscher-color-card${isExiting ? ' is-exiting' : ''}`}
+        onClick={() => !isExiting && !isSelected && onClick(color)}
+        className={`luscher-color-card${isExiting ? ' is-exiting' : ''}${isSelected ? ' is-selected' : ''}`}
         aria-label={`Обрати колір ${color.name}`}
     >
         <span className="luscher-color-card__fill" style={{ backgroundColor: color.hex }} />
@@ -280,17 +280,15 @@ export default function App() {
                             }
                         </p>
                         <div className="luscher-color-grid">
-                            {roundColors
-                                .filter(c => !selectedColors.some(s => s.id === c.id))
-                                .map(color => (
-                                    <ColorCard
-                                        key={color.id}
-                                        color={color}
-                                        onClick={handleColorSelect}
-                                        isExiting={exitingColorIds.has(color.id)}
-                                    />
-                                ))
-                            }
+                            {roundColors.map(color => (
+                                <ColorCard
+                                    key={color.id}
+                                    color={color}
+                                    onClick={handleColorSelect}
+                                    isExiting={exitingColorIds.has(color.id)}
+                                    isSelected={selectedColors.some(s => s.id === color.id)}
+                                />
+                            ))}
                         </div>
                         <div className="luscher-btn-row">
                             <button onClick={resetTest} className="luscher-btn-secondary" disabled={availableCount === 0}>
@@ -345,6 +343,14 @@ export default function App() {
                                 </div>
                                 <p className="luscher-card__text">На основі вашого вибору (2-й прохід)</p>
                             </div>
+
+                            {/* Condition redrering if link has "/?result_save=1" */}
+                            {new URLSearchParams(window.location.search).get('result_save') === '1' && (<div className="luscher-card luscher-results-header">
+                                <div className="luscher-card__label">
+                                    <img src={warningIcon} className="luscher-icon-sm" alt="" />
+                                    <span>Ваші результати записані в базу даних Супроводу</span>
+                                </div>
+                            </div>)}
 
                             <div className="luscher-card luscher-card--result">
                                 <p className="luscher-result-title">1. ПРАГНЕННЯ ТА ЦЛІ (БАЖАНЕ)</p>
