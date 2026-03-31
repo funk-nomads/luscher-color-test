@@ -82,8 +82,24 @@
 .luscher-stage {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 36px;
     animation: luscher-fade-up 0.3s ease both;
+}
+
+.luscher-stage__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.luscher-stage__inner--compact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.gap-24 {
+    gap: 24px;
 }
 
 @keyframes luscher-fade-up {
@@ -107,6 +123,12 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+}
+
+.luscher-card__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .luscher-card__label {

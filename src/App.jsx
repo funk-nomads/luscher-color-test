@@ -265,7 +265,7 @@ export default function App() {
 
                 {/* STAGE 2 & 4: TEST */}
                 {stage === 'test' && (
-                    <div className="luscher-stage">
+                    <div className="luscher-stage ">
                         <div className="luscher-card">
                             <p className="luscher-card__round-label">
                                 <span>Спроба {round}:</span>
@@ -310,13 +310,15 @@ export default function App() {
                                     <span>Невелика перерва</span>
                                 </div>
 
-                                <p className="luscher-card__text">Методика тестування передбачає два підходи з невеликим інтервалом між ними.</p>
-                                <p className="luscher-card__text">Будь ласка, зачекайте хвилинку та розслабтеся.</p>
-                                <ul className="luscher-instructions-list">
-                                    <li>Не намагайтеся згадати той порядок, у якому обирали кольори першого разу.</li>
-                                    <li>Але й не намагайтеся спеціально розкласти їх по-іншому.</li>
-                                    <li>Просто обирайте кольори, які вам подобаються, так, ніби бачите їх вперше.</li>
-                                </ul>
+                                <div className="luscher-card__inner">
+                                    <p className="luscher-card__text">Методика тестування передбачає два підходи з невеликим інтервалом між ними.</p>
+                                    <p className="luscher-card__text">Будь ласка, зачекайте хвилинку та розслабтеся.</p>
+                                    <ul className="luscher-instructions-list">
+                                        <li>Не намагайтеся згадати той порядок, у якому обирали кольори першого разу.</li>
+                                        <li>Але й не намагайтеся спеціально розкласти їх по-іншому.</li>
+                                        <li>Просто обирайте кольори, які вам подобаються, так, ніби бачите їх вперше.</li>
+                                    </ul>
+                                </div>
                             </div>
                             <div className="luscher-btn-row luscher-btn-row--gap">
                                 <button onClick={resetTest} className="luscher-btn-secondary">
@@ -334,107 +336,110 @@ export default function App() {
                 {/* STAGE 5: RESULTS */}
                 {
                     stage === 'results' && results && (
-                        <div className="luscher-stage">
-
-                            <div className="luscher-card luscher-results-header">
-                                <div className="luscher-card__label">
-                                    <img src={resultIcon} className="luscher-icon-sm" alt="" />
-                                    <span>Результати діагностики</span>
-                                </div>
-                                <p className="luscher-card__text">На основі вашого вибору (2-й прохід)</p>
-                            </div>
-
-                            {/* Condition redrering if link has "/?result_save=1" */}
-                            {new URLSearchParams(window.location.search).get('result_save') === '1' && (<div className="luscher-card luscher-results-header">
-                                <div className="luscher-card__label">
-                                    <img src={warningIcon} className="luscher-icon-sm" alt="" />
-                                    <span>Ваші результати записані в базу даних Супроводу</span>
-                                </div>
-                            </div>)}
-
-                            <div className="luscher-card luscher-card--result">
-                                <p className="luscher-result-title">1. ПРАГНЕННЯ ТА ЦЛІ (БАЖАНЕ)</p>
-                                <p className="luscher-result-label">Позиції 1 та 2 (++)</p>
-                                <p className="luscher-card__text">{results.goals}</p>
-                            </div>
-
-                            <div className="luscher-card luscher-card--result">
-                                <p className="luscher-result-title">2. ПОТОЧНИЙ СТАН (РЕАЛЬНЕ)</p>
-                                <p className="luscher-result-label">Позиції 3 та 4 (xx)</p>
-                                <p className="luscher-card__text">{results.actual}</p>
-                            </div>
-
-                            <div className="luscher-card luscher-card--result">
-                                <p className="luscher-result-title">3. СТРИМАНІ ВЛАСТИВОСТІ (БАЙДУЖЕ)</p>
-                                <p className="luscher-result-label">Позиції 5 та 6 (==)</p>
-                                <p className="luscher-card__text">{results.indifferent}</p>
-                            </div>
-
-                            <div className="luscher-card luscher-card--result">
-                                <p className="luscher-result-title">4. ПРИГНІЧЕНІ ПОТРЕБИ (СТРЕС)</p>
-                                <p className="luscher-result-label">Позиції 7 та 8 (--)</p>
-                                <p className="luscher-card__text">{results.rejected}</p>
-                            </div>
-
-                            {/* AI ANALYSIS */}
-                            {/*<div className="luscher-card luscher-card--ai">
-                            {!aiAnalysis && !loadingAi && !aiError && (
-                                <>
+                        <div className="luscher-stage gap-24">
+                            <div className="luscher-stage__inner">
+                                <div className="luscher-card luscher-results-header">
                                     <div className="luscher-card__label">
-                                        <Sparkles className="luscher-icon-sm" />
-                                        <span>Глибокий AI-аналіз</span>
+                                        <img src={resultIcon} className="luscher-icon-sm" alt="" />
+                                        <span>Результати діагностики</span>
                                     </div>
-                                    <p className="luscher-card__text" style={{ fontStyle: 'italic' }}>
-                                        Отримайте персоналізований синтез результатів та конкретні поради
-                                        для покращення стану за допомогою штучного інтелекту.
-                                    </p>
-                                    <div className="luscher-btn-row luscher-btn-row--left">
-                                        <button onClick={generateAIAnalysis} className="luscher-btn-green">
-                                            Створити розширений звіт
+                                    <p className="luscher-card__text">На основі вашого вибору (2-й прохід)</p>
+                                </div>
+
+                                {/* Condition redrering if link has "/?result_save=1" */}
+                                {new URLSearchParams(window.location.search).get('result_save') === '1' && (<div className="luscher-card luscher-results-header">
+                                    <div className="luscher-card__label">
+                                        <img src={warningIcon} className="luscher-icon-sm" alt="" />
+                                        <span>Ваші результати записані в базу даних Супроводу</span>
+                                    </div>
+                                </div>)}
+
+                                <div className="luscher-stage__inner--compact">
+                                    <div className="luscher-card luscher-card--result">
+                                        <p className="luscher-result-title">1. ПРАГНЕННЯ ТА ЦЛІ (БАЖАНЕ)</p>
+                                        <p className="luscher-result-label">Позиції 1 та 2 (++)</p>
+                                        <p className="luscher-card__text">{results.goals}</p>
+                                    </div>
+
+                                    <div className="luscher-card luscher-card--result">
+                                        <p className="luscher-result-title">2. ПОТОЧНИЙ СТАН (РЕАЛЬНЕ)</p>
+                                        <p className="luscher-result-label">Позиції 3 та 4 (xx)</p>
+                                        <p className="luscher-card__text">{results.actual}</p>
+                                    </div>
+
+                                    <div className="luscher-card luscher-card--result">
+                                        <p className="luscher-result-title">3. СТРИМАНІ ВЛАСТИВОСТІ (БАЙДУЖЕ)</p>
+                                        <p className="luscher-result-label">Позиції 5 та 6 (==)</p>
+                                        <p className="luscher-card__text">{results.indifferent}</p>
+                                    </div>
+
+                                    <div className="luscher-card luscher-card--result">
+                                        <p className="luscher-result-title">4. ПРИГНІЧЕНІ ПОТРЕБИ (СТРЕС)</p>
+                                        <p className="luscher-result-label">Позиції 7 та 8 (--)</p>
+                                        <p className="luscher-card__text">{results.rejected}</p>
+                                    </div>
+                                </div>
+
+                                {/* AI ANALYSIS */}
+                                {/*<div className="luscher-card luscher-card--ai">
+                                {!aiAnalysis && !loadingAi && !aiError && (
+                                    <>
+                                        <div className="luscher-card__label">
+                                            <Sparkles className="luscher-icon-sm" />
+                                            <span>Глибокий AI-аналіз</span>
+                                        </div>
+                                        <p className="luscher-card__text" style={{ fontStyle: 'italic' }}>
+                                            Отримайте персоналізований синтез результатів та конкретні поради
+                                            для покращення стану за допомогою штучного інтелекту.
+                                        </p>
+                                        <div className="luscher-btn-row luscher-btn-row--left">
+                                            <button onClick={generateAIAnalysis} className="luscher-btn-green">
+                                                Створити розширений звіт
+                                            </button>
+                                        </div>
+                                    </>
+                                )}
+
+                                {loadingAi && (
+                                    <div className="luscher-ai-loading">
+                                        <Loader2 className="luscher-icon-xl luscher-spin" />
+                                        <p>Штучний інтелект аналізує ваші вибори...</p>
+                                    </div>
+                                )}
+
+                                {aiError && (
+                                    <div className="luscher-ai-error"> 
+                                        <p>На жаль, виникла помилка при з'єднанні з AI.</p>
+                                        <button onClick={generateAIAnalysis} className="luscher-link-btn">
+                                            Спробувати ще раз
                                         </button>
                                     </div>
-                                </>
-                            )}
+                                )}
 
-                            {loadingAi && (
-                                <div className="luscher-ai-loading">
-                                    <Loader2 className="luscher-icon-xl luscher-spin" />
-                                    <p>Штучний інтелект аналізує ваші вибори...</p>
-                                </div>
-                            )}
+                                {aiAnalysis && (
+                                    <>
+                                        <div className="luscher-card__label">
+                                            <Sparkles className="luscher-icon-sm" />
+                                            <span>Персональний AI-звіт</span>
+                                        </div>
+                                        <div className="luscher-prose">
+                                            <ReactMarkdown>{aiAnalysis}</ReactMarkdown>
+                                        </div>
+                                    </>
+                                )}
+                            </div>*/}
 
-                            {aiError && (
-                                <div className="luscher-ai-error"> 
-                                    <p>На жаль, виникла помилка при з'єднанні з AI.</p>
-                                    <button onClick={generateAIAnalysis} className="luscher-link-btn">
-                                        Спробувати ще раз
-                                    </button>
-                                </div>
-                            )}
-
-                            {aiAnalysis && (
-                                <>
+                                {/* DISCLAIMER */}
+                                <div className="luscher-card">
                                     <div className="luscher-card__label">
-                                        <Sparkles className="luscher-icon-sm" />
-                                        <span>Персональний AI-звіт</span>
+                                        <img src={warningIcon} className="luscher-icon-sm" alt="" />
+                                        <span>Важливе зауваження:</span>
                                     </div>
-                                    <div className="luscher-prose">
-                                        <ReactMarkdown>{aiAnalysis}</ReactMarkdown>
-                                    </div>
-                                </>
-                            )}
-                        </div>*/}
-
-                            {/* DISCLAIMER */}
-                            <div className="luscher-card">
-                                <div className="luscher-card__label">
-                                    <img src={warningIcon} className="luscher-icon-sm" alt="" />
-                                    <span>Важливе зауваження:</span>
+                                    <p className="luscher-card__text">
+                                        Цей тест є інструментом для самопізнання "тут і зараз". Результати залежать від моменту тестування.
+                                        Якщо результати вказують на сильний стрес (особливо в блоці 4), рекомендується відпочити або звернутися до фахівця.
+                                    </p>
                                 </div>
-                                <p className="luscher-card__text">
-                                    Цей тест є інструментом для самопізнання "тут і зараз". Результати залежать від моменту тестування.
-                                    Якщо результати вказують на сильний стрес (особливо в блоці 4), рекомендується відпочити або звернутися до фахівця.
-                                </p>
                             </div>
 
                             <div className="luscher-btn-row">
